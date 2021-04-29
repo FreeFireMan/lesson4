@@ -3,7 +3,9 @@ import {View, Text, FlatList, StyleSheet, Button, TouchableOpacity} from 'react-
 import {getUsers} from "../api/API";
 import UserComponent from "./UserComponent";
 
-const UsersComponent = () => {
+const UsersComponent = (props) => {
+  const {navigation} = props;
+
   let [users, setUsers] = useState([]);
   async function fetchData() {
     let users = await getUsers();
@@ -15,7 +17,10 @@ const UsersComponent = () => {
   }, []);
    return (
        <View>
-           <FlatList data={users} renderItem={({item}) => {return <UserComponent item={item} />} }
+           <FlatList data={users}
+                     renderItem={({item}) => <UserComponent nav={navigation} item={item} /> }
+                     keyExtractor={item => '' + item.id}
+           />
         </View>
    );
 }
