@@ -20,6 +20,7 @@ const UsersComponent = (props) => {
            <FlatList data={users}
                      renderItem={({item}) => <UserComponent nav={navigation} item={item} /> }
                      keyExtractor={item => '' + item.id}
+                     // horizontal={true}
            />
         </View>
    );

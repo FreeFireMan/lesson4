@@ -1,22 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import { StatusBar } from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
-import UsersComponent from "./src/component/UsersComponent";
-import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from "@react-navigation/native";
-import PostsComponent from "./src/component/PostsComponent";
-import UserDetailsComponent from "./src/component/UserDetailsComponent";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import UsersComponent from "./src/component/UsersComponent";
+import PostDrawer from "./src/component/PostDrawer";
 
-let StackNavigator = createStackNavigator();
+let BottomTabNavigator = createBottomTabNavigator();
+
 export default function App() {
 
   return (
     <NavigationContainer>
-      <StackNavigator.Navigator>
-        <StackNavigator.Screen name={'Users'} component={UsersComponent} />
-        <StackNavigator.Screen name={'Posts'} component={PostsComponent} />
-        <StackNavigator.Screen name={'UserDetails'} component={UserDetailsComponent} />
-      </StackNavigator.Navigator>
+      <BottomTabNavigator.Navigator tabBarOptions={{tabStyle: {
+          justifyContent: 'center',
+          alignItems: 'center',
+      },
+      labelStyle: {
+        fontSize: 20
+      }}}>
+          <BottomTabNavigator.Screen name={'users'} component={UsersComponent} />
+          <BottomTabNavigator.Screen name={'postDrawer'} component={PostDrawer} />
+      </BottomTabNavigator.Navigator>
     </NavigationContainer>
   );
 }
